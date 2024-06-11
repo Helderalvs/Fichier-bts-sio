@@ -7,23 +7,33 @@ if (session_status() == PHP_SESSION_NONE) {
 if (isset($_SESSION['role']) && $_SESSION['role'] == 'client') {
     // Afficher le formulaire de réservation
     ?>
-<form method="post" action="traitement_reservation.php">
-    <input type="hidden" name="id_materiel" value="<?php echo $unMatNeige['id_materiel']; ?>">
-    
-    <label for="date_debut">Date de début :</label>
-    <input type="date" name="date_debut" id="date_debut" required>
-    
-    <label for="date_fin">Date de fin :</label>
-    <input type="date" name="date_fin" id="date_fin" required>
-    
-    <input type="submit" name="submit_reservation" value="Réserver">
+
+<form method="post" action="reserver.php">
+    <label for="id_materiel">Matériel :</label>
+    <select name="id_materiel" id="id_materiel" required>
+        <?php
+        // Récupérer tous les matériels pour remplir le menu déroulant
+        $modele_materiel = new Modele();
+        $modele_materiel->setTable("mat_neige"); // Ou mat_rando selon le matériel
+        $lesMateriels = $modele_materiel->selectAll();
+        foreach ($lesMateriels as $materiel) {
+            echo '<option value="'.$materiel['id_materiel'].'">'.$materiel['nom'].'</option>';
+        }
+        ?>
+    </select>
+    <br>
+    <label for="dateDebutLoc">Date début location :</label>
+    <input type="date" name="dateDebutLoc" id="dateDebutLoc" required>
+    <br>
+    <label for="dateFinLoc">Date fin location :</label>
+    <input type="date" name="dateFinLoc" id="dateFinLoc" required>
+    <br>
+    <input type="submit" name="reserve_btn" value="Réserver">
 </form>
-
-
     <?php
 } else {
     // Rediriger vers la page de connexion
-    header("Location: index.php?page=9");
+    header("Location: index.php?page=10");
     exit(); // Arrêter l'exécution du script après la redirection
 }
 ?>

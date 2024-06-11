@@ -1,9 +1,4 @@
 <?php
-// Démarrer la session
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
 // Inclure la classe Modele
 require_once('modele/modele.class.php');
 
@@ -28,22 +23,54 @@ if (isset($_POST['supprimer'])) {
 
 // Traitement de la réservation
 if (isset($_POST['reserve_btn'])) {
-    $date_resa = $_POST['date_resa'] ?? '';
-    $prix = $_POST['prix'] ?? 0;
+    $id_materiel = $_POST['id_materiel'] ?? null;
     $dateDebutLoc = $_POST['dateDebutLoc'] ?? '';
     $dateFinLoc = $_POST['dateFinLoc'] ?? '';
-    $etat_resa = $_POST['etat_resa'] ?? '';
 
-    $modele_reservation->insert(array(
-        "date_resa" => $date_resa,
-        "prix" => $prix,
-        "dateDebutLoc" => $dateDebutLoc,
-        "dateFinLoc" => $dateFinLoc,
-        "etat_resa" => $etat_resa
-    ));
+    if ($id_materiel && $dateDebutLoc && $dateFinLoc) {
+        $modele_materiel = new Modele();
+        $modele_materiel->setTable("mat_neige"); // Ou mat_rando selon le matériel
+        $materiel = $modele_materiel->selectWhere(array("id_materiel" => $id_materiel));
 
-    header("Location: index.php?page=5");
-    exit();
+        if ($materiel) {
+            if (is_numeric($materiel['prix_loca'])) {
+                $dateDebut = new DateTime($dateDebutLoc);
+                $dateFin = new DateTime($dateFinLoc);
+                $dureeLocation = $dateDebut->diff($dateFin)->days;
+
+                if ($dureeLocation > 0) {
+                    $prixTotal = $materiel['prix_loca'] * $dureeLocation;
+
+                    // Suppression de la vérification de l'utilisateur connecté
+                    $data = array(
+                        "id_user" => $id_user, // Utilisateur par défaut
+                        "id_materiel" => $id_materiel,
+                        "date_resa" => date("Y-m-d"),
+                        "prix" => $prixTotal,
+                        "dateDebutLoc" => $dateDebutLoc,
+                        "dateFinLoc" => $dateFinLoc,
+                        "etat_resa" => "en attente"
+                    );
+
+                    $result = $modele_reservation->insert($data);
+
+                    if ($result) {
+                        echo "Réservation réussie pour le matériel : " . $materiel['nom'] . ". Prix total : " . $prixTotal . "€";
+                    } else {
+                        echo "Erreur lors de la réservation. Veuillez réessayer.";
+                    }
+                } else {
+                    echo "La durée de la location doit être supérieure à zéro.";
+                }
+            } else {
+                echo "Prix du matériel non valide.";
+            }
+        } else {
+            echo "Matériel non trouvé.";
+        }
+    } else {
+        echo "Veuillez saisir les dates de début et de fin de location.";
+    }
 }
 
 // Définir les variables nécessaires pour le formulaire de réservation
@@ -56,7 +83,6 @@ $etat_resa = '';
 // Inclure la vue pour le formulaire de réservation
 require_once('vue/vue_insert_reservation.php');
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,26 +99,21 @@ require_once('vue/vue_insert_reservation.php');
     <br>
     <table border="1">
         <tr>
-            <td>ID réservation</td>
             <td>Date réservation</td>
             <td>Prix</td>
             <td>Date début location</td>
             <td>Date fin location</td>
             <td>État réservation</td>
-            <?php if (isset($_SESSION['role']) && $_SESSION['role'] == "client") {
-                echo "<td>Opérations</td>";
-            } ?>
         </tr>
 
         <?php
         if (isset($lesReservations)) {
             foreach ($lesReservations as $uneReservation) {
                 echo "<tr>";
-                echo "<td>".$uneReservation['id_resa']."</td>";
-                echo "<td>".$uneReservation['id_user']."</td>";
-                echo "<td>".$uneReservation['id_cours']."</td>";
                 echo "<td>".$uneReservation['date_resa']."</td>";
                 echo "<td>".$uneReservation['prix']."</td>";
+                echo "<td>".$uneReservation['dateDebutLoc']."</td>";
+                echo "<td>".$uneReservation['dateFinLoc']."</td>";
                 echo "<td>".$uneReservation['etat_resa']."</td>";
                 echo "</tr>";
             }
@@ -101,4 +122,3 @@ require_once('vue/vue_insert_reservation.php');
     </table>
 </body>
 </html>
-

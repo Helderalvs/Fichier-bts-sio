@@ -115,6 +115,7 @@
         case 5: require_once("gestion_cours.php"); break;
         case 8: require_once("gestion_inscription.php"); break;
         case 9: require_once("gestion_connexion.php"); break; 
+       // case 10: require_once("reserver.php"); break; 
         case 10: require_once("gestion_reservation.php"); break; 
         case 11: require_once("Confirmation.php"); break;
         case 12: require_once("profil.php"); break;

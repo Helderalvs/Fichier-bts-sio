@@ -53,14 +53,12 @@ if (!empty($filtre)) {
             echo "<td>".$unMatNeige['prix_loca']."</td>";
             echo "<td>".$unMatNeige['stock_initial']."</td>";
             echo "<td>".$unMatNeige['etat_materiel']."</td>";
-            if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
+            if (isset($_SESSION['role']) && $_SESSION['role'] == "client") {
                 echo "<td>";
-                echo "<a href='index.php?page=2&action=sup&id_materiel=".$unMatNeige['id_materiel']."'>
-                    <img src='images/supprimer.png' height='30' width='30'>
-                    </a>";
-                echo "<a href='index.php?page=2&action=edit&id_materiel=".$unMatNeige['id_materiel']."'>
-                    <img src='images/editer.png' height='30' width='30'>
-                    </a>";
+                echo "<form method='post' action='reserver.php'>";
+                echo "<input type='hidden' name='id_materiel' value='".$unMatNeige['id_materiel']."'>";
+                echo "<input type='submit' name='reserver' value='Réserver'>";
+                echo "</form>";
                 echo "</td>";
             }
             echo "</tr>";

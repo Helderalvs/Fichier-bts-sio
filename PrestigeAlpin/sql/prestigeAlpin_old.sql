@@ -174,10 +174,11 @@ insert into user values
 insert into user values 
 (null, "Leveque", "Vincent", "vincent@gmail.com", "123","rue victor hugo","0654344323","moniteur"); 
 
+/*
 INSERT INTO client VALUES (null, "alves","helder","helder2@gmail.com","123", "rue victor hugo",'75016','Paris','0654455676','rue du ski','18000','val disere','client');
 
 INSERT INTO moniteur VALUES (null, "lulu","lolo","vincent2@gmail.com","555", "rue victor hugo",'75016','Paris','0654455676',curdate(),'moniteur');
-
+*/
 
 
 DROP TRIGGER IF EXISTS insert_mat_neige;
@@ -209,23 +210,19 @@ END //
 DELIMITER ;
 
 -- exemple d''insertion
-INSERT INTO mat_neige VALUES (null, 'le roi', 'nike',10.2, 50, 'Comme neuf', 30.6, 'forte', 'comme neuf','aerodrift','mat_neige');
-
-INSERT INTO mat_rando VALUES (null, 'la reine', 'adidas', 10.2, 100, 'Comme neuf', 27.6, 'forte', 120.7, 'facile', 'super dur', 'mat_rando');
-
 
 INSERT INTO mat_neige (nom, marque, prix_loca, stock_initial, etat_materiel, longeur_skis, type_fixation, niveau_usure, type_ski, role) 
 VALUES 
 ('Ski Rossignol Experience 88 Ti', 'Rossignol', 30.00, 10, 'neuf', 170.00, 'fixations classiques', 'faible', 'piste', 'mat_neige'),
-('Snowboard Burton Custom X', 'Burton', 25.00, 8, 'usé', NULL, 'fixations spéciales', 'moyen', 'freestyle', 'mat_neige'),
+('Snowboard Burton Custom X', 'Burton', 25.00, 8, 'user', NULL, 'fixations spéciales', 'moyen', 'freestyle', 'mat_neige'),
 ('Ski Salomon QST 106', 'Salomon', 35.00, 12, 'bon', 160.00, 'fixations réglables', 'élevé', 'piste', 'mat_neige'),
 ('Snowboard Lib Tech T.Rice Pro', 'Lib Tech', 28.00, 6, 'neuf', NULL, 'fixations spéciales', 'négligeable', 'freeride', 'mat_neige'),
-('Ski Atomic Vantage 90 Ti', 'Atomic', 32.00, 9, 'usé', 175.00, 'fixations classiques', 'moyen', 'piste', 'mat_neige'),
+('Ski Atomic Vantage 90 Ti', 'Atomic', 32.00, 9, 'user', 175.00, 'fixations classiques', 'moyen', 'piste', 'mat_neige'),
 ('Snowboard Ride Warpig', 'Ride', 29.00, 11, 'bon', NULL, 'fixations réglables', 'faible', 'freestyle', 'mat_neige'),
-('Ski Fischer RC One 86 GT', 'Fischer', 26.00, 7, 'usé', 165.00, 'fixations classiques', 'élevé', 'piste', 'mat_neige'),
+('Ski Fischer RC One 86 GT', 'Fischer', 26.00, 7, 'user', 165.00, 'fixations classiques', 'élevé', 'piste', 'mat_neige'),
 ('Snowboard GNU Carbon Credit', 'GNU', 33.00, 10, 'neuf', NULL, 'fixations spéciales', 'négligeable', 'freestyle', 'mat_neige'),
 ('Ski Head Kore 93', 'Head', 27.00, 8, 'bon', 180.00, 'fixations réglables', 'moyen', 'freeride', 'mat_neige'),
-('Snowboard Arbor Element', 'Arbor', 31.00, 9, 'usé', NULL, 'fixations classiques', 'faible', 'freeride', 'mat_neige');
+('Snowboard Arbor Element', 'Arbor', 31.00, 9, 'user', NULL, 'fixations classiques', 'faible', 'freeride', 'mat_neige');
 
 
 INSERT INTO mat_rando (nom, marque, prix_loca, stock_initial, etat_materiel, taille_harnais, type_corde, poids_max, type_ancrage, niveau_regidite, role) 
@@ -258,6 +255,8 @@ INSERT INTO cours (nom_cours, description_cours, niveau_difficulte, date_cours, 
 ('Cours de Freeride', 'Un cours pour les amateurs de hors-piste et de descentes sauvages.', 'Difficile', '2024-05-01', '15:30:00', 37.50, 3),
 ('Cours de Ski Alpinisme', 'Découvrez l''alpinisme sur skis avec ce cours aventureux.', 'Difficile', '2024-05-10', '18:00:00', 50.00, 2);
 
+
+/*
 INSERT INTO reservation (date_resa, prix, dateDebutLoc, dateFinLoc, etat_resa) VALUES
 ('2024-03-01', 120.00, '2024-04-01', '2024-04-05', 'en attente'),
 ('2024-03-02', 150.50, '2024-04-10', '2024-04-15', 'confirmee'),
@@ -269,7 +268,7 @@ INSERT INTO reservation (date_resa, prix, dateDebutLoc, dateFinLoc, etat_resa) V
 ('2024-03-08', 220.50, '2024-07-15', '2024-07-20', 'confirmee'),
 ('2024-03-09', 180.75, '2024-08-01', '2024-08-10', 'en attente'),
 ('2024-03-10', 210.25, '2024-08-15', '2024-08-20', 'confirmee');
-
+*/
 
 
 
