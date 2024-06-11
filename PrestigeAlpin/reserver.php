@@ -1,55 +1,64 @@
 <?php
-require_once("controleur/controleur.class.php");
 
-// Instanciation de la classe Controleur
-$unControleur = new Controleur();
+// Inclure la classe Modele
+require_once('modele/modele.class.php');
 
-// Définir la table sur "mat_rando" 
-$unControleur->setTable("mat_neige");
+// Créer une instance de la classe Modele pour la table des réservations
+$modele_reservation = new Modele();
+$modele_reservation->setTable("reservation");
 
-if (isset($_POST['id_materiel'])) {
-    $id_materiel = $_POST['id_materiel'];
+// Récupérer toutes les réservations
+$lesReservations = $modele_reservation->selectAll();
 
-    // Récupérer les valeurs saisies par l'utilisateur pour les dates de début et de fin de location
-    $dateDebutLoc = isset($_POST['dateDebutLoc']) ? $_POST['dateDebutLoc'] : '';
-    $dateFinLoc = isset($_POST['dateFinLoc']) ? $_POST['dateFinLoc'] : '';
+// Vérification si le formulaire de suppression a été soumis
+if (isset($_POST['supprimer'])) {
+    if (isset($_POST['id_resa'])) {
+        $id_resa = $_POST['id_resa'];
+        $modele_reservation->delete(array("id_resa" => $id_resa));
+        
+        // Réactualiser la page pour afficher les changements
+        header("Location: index.php?page=6");
+        exit();
+    }
+}
 
-    // Vérifier si les dates de début et de fin de location sont saisies
-    if (!empty($dateDebutLoc) && !empty($dateFinLoc)) {
-        // Récupérer les informations sur le matériel
-        $materiel = $unControleur->selectWhere(array("id_materiel" => $id_materiel));
+// Traitement de la réservation
+if (isset($_POST['reserve_btn'])) {
+    $id_materiel = $_POST['id_materiel'] ?? null;
+    $dateDebutLoc = $_POST['dateDebutLoc'] ?? '';
+    $dateFinLoc = $_POST['dateFinLoc'] ?? '';
+
+    if ($id_materiel && $dateDebutLoc && $dateFinLoc) {
+        $modele_materiel = new Modele();
+        $modele_materiel->setTable("mat_neige"); // Ou mat_rando selon le matériel
+        $materiel = $modele_materiel->selectWhere(array("id_materiel" => $id_materiel));
 
         if ($materiel) {
-            // Vérifier si le prix du matériel est numérique
             if (is_numeric($materiel['prix_loca'])) {
-                // Calculer la durée de la location en jours
                 $dateDebut = new DateTime($dateDebutLoc);
                 $dateFin = new DateTime($dateFinLoc);
                 $dureeLocation = $dateDebut->diff($dateFin)->days;
 
-                // Vérifier si la durée de location est valide (supérieure à zéro)
                 if ($dureeLocation > 0) {
-                    // Calculer le prix total
                     $prixTotal = $materiel['prix_loca'] * $dureeLocation;
 
-                    // Insérer la réservation dans la table des réservations
+                    // Suppression de la vérification de l'utilisateur connecté
                     $data = array(
-                        "id_user" => isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null,
+                        "id_user" => 1, // Utilisateur par défaut
                         "id_materiel" => $id_materiel,
-                        "date_resa" => date("Y-m-d"), // Utiliser la date actuelle
-                        "prix_loca" => $prixTotal, // Utiliser le prix total calculé
+                        "date_resa" => date("Y-m-d"),
+                        "prix" => $prixTotal,
                         "dateDebutLoc" => $dateDebutLoc,
                         "dateFinLoc" => $dateFinLoc,
-                        "etat_resa" => "en attente" // Mettre à jour l'état en fonction de votre logique
+                        "etat_resa" => "en attente"
                     );
 
-                    // Insérer la réservation dans la table des réservations
-                    $result = $unControleur->insertReservation($data);
+                    $result = $modele_reservation->insert($data);
 
                     if ($result) {
                         echo "Réservation réussie pour le matériel : " . $materiel['nom'] . ". Prix total : " . $prixTotal . "€";
-                    } else {
-                        echo "Erreur lors de la réservation. Veuillez réessayer.";
+                        // Redirection vers la page de réservation
+                        header("Location: index.php?page=10");
                     }
                 } else {
                     echo "La durée de la location doit être supérieure à zéro.";
@@ -57,13 +66,19 @@ if (isset($_POST['id_materiel'])) {
             } else {
                 echo "Prix du matériel non valide.";
             }
-        } else {
-            echo "Matériel non trouvé.";
-        }
+        } 
     } else {
         echo "Veuillez saisir les dates de début et de fin de location.";
     }
 }
 
-require_once("vue/vue_select_reservation.php");
+// Définir les variables nécessaires pour le formulaire de réservation
+$date_resa = ''; // Initialisez ces variables avec des valeurs par défaut
+$prix = 0;
+$dateDebutLoc = '';
+$dateFinLoc = '';
+$etat_resa = '';    
+
+// Inclure la vue pour le formulaire de réservation
+require_once('vue/vue_insert_reservation.php');
 ?>

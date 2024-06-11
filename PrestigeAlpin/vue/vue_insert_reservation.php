@@ -7,17 +7,23 @@ if (session_status() == PHP_SESSION_NONE) {
 if (isset($_SESSION['role']) && $_SESSION['role'] == 'client') {
     // Afficher le formulaire de réservation
     ?>
-
 <form method="post" action="reserver.php">
     <label for="id_materiel">Matériel :</label>
     <select name="id_materiel" id="id_materiel" required>
         <?php
-        // Récupérer tous les matériels pour remplir le menu déroulant
-        $modele_materiel = new Modele();
-        $modele_materiel->setTable("mat_neige"); // Ou mat_rando selon le matériel
-        $lesMateriels = $modele_materiel->selectAll();
-        foreach ($lesMateriels as $materiel) {
-            echo '<option value="'.$materiel['id_materiel'].'">'.$materiel['nom'].'</option>';
+        // Récupérer à la fois les matériels de ski et de randonnée pour remplir le menu déroulant
+        $modele_materiel_ski = new Modele();
+        $modele_materiel_ski->setTable("mat_neige"); // Matériel de ski
+        $lesMaterielsSki = $modele_materiel_ski->selectAll();
+        foreach ($lesMaterielsSki as $materiel_ski) {
+            echo '<option value="'.$materiel_ski['id_materiel'].'">'.$materiel_ski['nom'].' (Ski)</option>';
+        }
+
+        $modele_materiel_rando = new Modele();
+        $modele_materiel_rando->setTable("mat_rando"); // Matériel de randonnée
+        $lesMaterielsRando = $modele_materiel_rando->selectAll();
+        foreach ($lesMaterielsRando as $materiel_rando) {
+            echo '<option value="'.$materiel_rando['id_materiel'].'">'.$materiel_rando['nom'].' (Randonnée)</option>';
         }
         ?>
     </select>
@@ -30,6 +36,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 'client') {
     <br>
     <input type="submit" name="reserve_btn" value="Réserver">
 </form>
+
     <?php
 } else {
     // Rediriger vers la page de connexion

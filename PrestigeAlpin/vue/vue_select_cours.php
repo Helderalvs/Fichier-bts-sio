@@ -13,7 +13,7 @@ $lesCours = $modele->selectAll();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="css/tab.css">
+    <link rel="stylesheet" href="css/style_front.css">
 </head>
 <body>
 
@@ -44,7 +44,7 @@ $lesCours = $modele->selectAll();
             echo "<td>".$cours['prix_cours']."</td>";
             echo "<td>";
             if (isset($_SESSION['role']) && $_SESSION['role'] == "client") {
-                echo "<form method='post' action='gestion_reservation.php'>";
+                echo "<form method='post' action='reserver_cours.php'>";
                 echo "<input type='hidden' name='id_cours' value='".$cours['id_cours']."'>";
                 echo "<input type='submit' name='reserver' value='Réserver'>";
                 echo "</form>";

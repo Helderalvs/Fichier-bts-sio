@@ -26,7 +26,7 @@ if (!empty($filtre)) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="css/tab.css">
+    <link rel="stylesheet" href="css/style_front.css">
 
 <form method="post">
     Filtrer par : <input type="text" name="filtre">

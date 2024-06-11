@@ -146,14 +146,16 @@ $lesCours = $modele->selectAll();
     <div class="banner">
         <div class="content">
             <p>Explorer et S'amuser ? Alors équipez-vous !!</p>
-            <div>
-                <a href="index.php?page=8">
-                    <button type="button">S'inscrire <span></span></button>
-                </a>
-                <a href="index.php?page=9">
-                    <button type="button">Se connecter<span></span></button>
-                </a>
-            </div>
+            <?php if (!isset($_SESSION['role'])) { ?>
+                <div>
+                    <a href="index.php?page=8">
+                        <button type="button">S'inscrire <span></span></button>
+                    </a>
+                    <a href="index.php?page=9">
+                        <button type="button">Se connecter<span></span></button>
+                    </a>
+                </div>
+            <?php } ?>
         </div>
     </div>
 

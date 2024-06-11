@@ -29,6 +29,7 @@ if (!empty($filtre)) {
 <html lang="en">
 <head>
     <link rel="stylesheet" href="css/tab.css">
+    <link rel="stylesheet" href="css/style_front.css">
 
 
 
