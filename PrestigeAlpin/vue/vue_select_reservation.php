@@ -1,4 +1,5 @@
 <?php
+
 // Inclure la classe Modele
 require_once('modele/modele.class.php');
 
@@ -43,7 +44,7 @@ if (isset($_POST['reserve_btn'])) {
 
                     // Suppression de la vérification de l'utilisateur connecté
                     $data = array(
-                        "id_user" => $id_user, // Utilisateur par défaut
+                        "id_user" => 1, // Utilisateur par défaut
                         "id_materiel" => $id_materiel,
                         "date_resa" => date("Y-m-d"),
                         "prix" => $prixTotal,
@@ -56,8 +57,6 @@ if (isset($_POST['reserve_btn'])) {
 
                     if ($result) {
                         echo "Réservation réussie pour le matériel : " . $materiel['nom'] . ". Prix total : " . $prixTotal . "€";
-                    } else {
-                        echo "Erreur lors de la réservation. Veuillez réessayer.";
                     }
                 } else {
                     echo "La durée de la location doit être supérieure à zéro.";
@@ -65,9 +64,7 @@ if (isset($_POST['reserve_btn'])) {
             } else {
                 echo "Prix du matériel non valide.";
             }
-        } else {
-            echo "Matériel non trouvé.";
-        }
+        } 
     } else {
         echo "Veuillez saisir les dates de début et de fin de location.";
     }

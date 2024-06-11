@@ -172,13 +172,11 @@ insert into user values
 (null, "alves", "helder", "helder@gmail.com", "123","rue victor hugo","0654344323","client"); 
 
 insert into user values 
+(null, "alves", "helder", "helderAdmin@gmail.com", "456","rue victor hugo","0654344323","Admin"); 
+
+insert into user values 
 (null, "Leveque", "Vincent", "vincent@gmail.com", "123","rue victor hugo","0654344323","moniteur"); 
 
-/*
-INSERT INTO client VALUES (null, "alves","helder","helder2@gmail.com","123", "rue victor hugo",'75016','Paris','0654455676','rue du ski','18000','val disere','client');
-
-INSERT INTO moniteur VALUES (null, "lulu","lolo","vincent2@gmail.com","555", "rue victor hugo",'75016','Paris','0654455676',curdate(),'moniteur');
-*/
 
 
 DROP TRIGGER IF EXISTS insert_mat_neige;

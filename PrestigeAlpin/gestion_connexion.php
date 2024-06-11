@@ -17,11 +17,12 @@ if (isset($_POST['Connexion'])) {
 
         if ($unUser != null) {
             // Authentification réussie
+            $_SESSION['id_user'] = $unUser['id']; // Ajout de l'identifiant de l'utilisateur à la session
             $_SESSION['email'] = $unUser['email'];
             $_SESSION['nom'] = $unUser['nom'];
             $_SESSION['prenom'] = $unUser['prenom'];
             $_SESSION['role'] = $unUser['role']; // Assurez-vous que le rôle est défini dans vos données utilisateur
-
+        
             // Redirection en fonction du rôle de l'utilisateur
             if ($unUser['role'] == "client") {
                 header("Location: index.php?page=2"); // Page client
@@ -32,6 +33,7 @@ if (isset($_POST['Connexion'])) {
                 echo "Erreur de redirection. Veuillez contacter l'administrateur.";
             }
             exit(); // Fin du script après la redirection
+        }
         } else {
             // Identifiants incorrects
             echo "<br> Veuillez vérifier vos identifiants.";
@@ -40,6 +42,5 @@ if (isset($_POST['Connexion'])) {
         // Champ(s) manquant(s)
         echo "<br> Veuillez remplir tous les champs.";
     }
-}
 ?>
 

@@ -4,8 +4,8 @@ require_once("controleur/controleur.class.php");
 // Instanciation de la classe Controleur
 $unControleur = new Controleur();
 
-// Définir la table sur "mat_rando"
-$unControleur->setTable("mat_rando");
+// Définir la table sur "mat_rando" 
+$unControleur->setTable("mat_neige");
 
 if (isset($_POST['id_materiel'])) {
     $id_materiel = $_POST['id_materiel'];

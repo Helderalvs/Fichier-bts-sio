@@ -140,7 +140,7 @@ class Modele {
 		// Exécution de la requête avec les données de réservation
 		$insertion->execute(array(
 			":date_resa" => $reservationData["date_resa"],
-			":prix" => $reservationData["prix"],
+			":prix" => $reservationData["prix_loca"],
 			":dateDebutLoc" => $reservationData["dateDebutLoc"],
 			":dateFinLoc" => $reservationData["dateFinLoc"],
 			":etat_resa" => $reservationData["etat_resa"]
