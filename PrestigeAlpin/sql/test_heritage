@@ -1,0 +1,87 @@
+drop database if exists testHeritage; 
+create database testHeritage; 
+use testHeritage; 
+
+create table user (
+    id_user int(10) not null auto_increment,
+    nom VARCHAR(50),
+    prenom VARCHAR(50),
+    email VARCHAR(50),
+    mdp VARCHAR(50),
+    adresse VARCHAR(50),
+    telephone int(20),
+    role enum('client','representant'),
+    primary key (id_user)
+);
+ 
+
+create table client (
+    id_user int(10) not null auto_increment,
+    nom VARCHAR(50),
+    prenom VARCHAR(50),
+    email VARCHAR(50),
+    mdp VARCHAR(50),
+    adresse VARCHAR(50),
+    cp char(5),
+    ville VARCHAR(50),
+    telephone char(12),
+    adresse_vac varchar(50),
+    code_postal varchar(50),
+    ville_vac VARCHAR(50),
+    role enum('client','representant'),
+    primary key (id_user)
+);
+
+create table representant (
+    id_user int(10) not null auto_increment,
+    nom VARCHAR(50),
+    prenom VARCHAR(50),
+    email VARCHAR(50),
+    mdp VARCHAR(50),
+    adresse VARCHAR(50),
+    cp char(5),
+    ville VARCHAR(50),
+    telephone char(12),
+    date_debut date,
+    role enum('client','representant'),
+    primary key (id_user)
+);
+
+
+
+DROP TRIGGER IF EXISTS insert_client;
+DELIMITER //
+CREATE TRIGGER insert_client
+BEFORE INSERT ON client
+FOR EACH ROW
+BEGIN
+    if new.id_user is null or new.id_user in (select id_user from user) or new.id_user = 0
+        then
+            set new.id_user = ifnull((select id_user from user where id_user >= all(select id_user from user)), 0) + 1;
+    end if;
+    insert into user values (new.id_user, new.nom, new.prenom, new.email, new.mdp, new.adresse,new.telephone, new.role);
+END //
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS insert_representant;
+DELIMITER //
+CREATE TRIGGER insert_representant
+BEFORE INSERT ON representant
+FOR EACH ROW
+BEGIN
+    if new.id_user is null or new.id_user in (select id_user from user) or new.id_user = 0
+        then
+            set new.id_user = ifnull((select id_user from user where id_user >= all(select id_user from user)), 0) + 1;
+    end if;
+    insert into user values (new.id_user, new.nom, new.prenom, new.email, new.mdp, new.adresse,new.telephone, new.role);
+END //
+DELIMITER ;
+
+
+
+
+INSERT INTO client VALUES (null, "lala","lili","lili@gmail.com","123", "rue victor hugo",'75016','Paris','0654455676','rue du ski','18000','val disere','client');
+
+INSERT INTO moniteur VALUES (null, "lulu","lolo", "rue victor hugo",'75016','Paris','0654455676',curdate(),'representant');
+
+

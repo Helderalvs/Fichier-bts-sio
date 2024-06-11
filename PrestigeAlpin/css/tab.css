@@ -1,0 +1,31 @@
+/* Style pour le tableau */
+table {
+    width: 80%;
+    border-collapse: collapse;
+}
+
+/* Style pour les cellules du tableau */
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* Style pour les lignes impaires du tableau */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Style pour le formulaire de filtrage */
+form {
+    margin-bottom: 20px;
+}
+
+/* Style pour le titre */
+h3 {
+    margin-bottom: 20px;
+}
+
+/* Style pour les liens d'opérations */
+a {
+    margin-right: 5px;
+}
