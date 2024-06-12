@@ -281,5 +281,21 @@ class Modele {
 			return null;
 		}
 	}
+	public function selectJoin($table1, $table2, $field1, $field2, $fields = array()) {
+		// Préparer la liste des champs à sélectionner
+		$fields_str = implode(',', $fields);
+		
+		// Préparer la requête SQL avec la jointure
+		$sql = "SELECT $fields_str, $table2.marque AS marque_materiel, $table2.prix_loca AS prix_base_materiel FROM $table1 INNER JOIN $table2 ON $table1.$field1 = $table2.$field2";
+		
+		// Exécuter la requête
+		$select = $this->unPDO->prepare($sql);
+		$select->execute();
+
+		// Retourner les résultats
+		return $select->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+
 }
 ?>

@@ -1,3 +1,5 @@
+
+
 <?php
 
 // Inclure la classe Modele
@@ -29,9 +31,17 @@ if (isset($_POST['reserve_btn'])) {
     $dateFinLoc = $_POST['dateFinLoc'] ?? '';
 
     if ($id_materiel && $dateDebutLoc && $dateFinLoc) {
-        $modele_materiel = new Modele();
-        $modele_materiel->setTable("mat_neige"); // Ou mat_rando selon le matériel
-        $materiel = $modele_materiel->selectWhere(array("id_materiel" => $id_materiel));
+        $modele_materiel_neige = new Modele();
+        $modele_materiel_neige->setTable("mat_neige");
+        $materiel_neige = $modele_materiel_neige->selectWhere(array("id_materiel" => $id_materiel));
+
+        $modele_materiel_rando = new Modele();
+        $modele_materiel_rando->setTable("mat_rando");
+        $materiel_rando = $modele_materiel_rando->selectWhere(array("id_materiel" => $id_materiel));
+
+        // Fusionner les données récupérées des deux tables
+        $materiel = ($materiel_neige) ? $materiel_neige : $materiel_rando;
+
 
         if ($materiel) {
             if (is_numeric($materiel['prix_loca'])) {

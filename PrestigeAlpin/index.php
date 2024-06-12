@@ -72,6 +72,9 @@
         <li class="nav-item">
         <a class="nav-link" href="index.php?page=10">Vos réservations</a>
       </li>
+         <li class="nav-item">
+        <a class="nav-link" href="index.php?page=20">Vos réservations cours</a>
+      </li>
         <li class="nav-item">
           <a class="nav-link" href="index.php?page=12">Mon compte</a>
         </li>
@@ -117,6 +120,7 @@
         case 9: require_once("gestion_connexion.php"); break; 
        // case 10: require_once("reserver.php"); break; 
         case 10: require_once("gestion_reservation.php"); break; 
+        case 20: require_once("gestion_reservation_cours.php"); break; 
         case 11: require_once("Confirmation.php"); break;
         case 12: require_once("profil.php"); break;
         case 13: require_once("gestion_planning.php"); break;
