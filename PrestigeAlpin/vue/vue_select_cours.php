@@ -28,7 +28,11 @@ $lesCours = $modele->selectAll();
         <td>Date</td>
         <td>Durée</td>
         <td>Prix</td>
-        <td>Action</td>
+        <?php
+        if (isset($_SESSION['role']) && $_SESSION['role'] == "client") {
+            echo "<td>Action</td>";
+        }
+        ?>
     </tr>
 
     <?php

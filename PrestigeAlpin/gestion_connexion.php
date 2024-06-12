@@ -27,7 +27,7 @@ if (isset($_POST['Connexion'])) {
             if ($unUser['role'] == "client") {
                 header("Location: index.php?page=2"); // Page client
             } elseif ($unUser['role'] == "moniteur") {
-                header("Location: index.php?page=8"); // Page représentant (à adapter en fonction de votre logique de redirection)
+                header("Location: index.php?page=1"); // Page représentant (à adapter en fonction de votre logique de redirection)
             } else {
                 // Rôle non défini ou invalide
                 echo "Erreur de redirection. Veuillez contacter l'administrateur.";
