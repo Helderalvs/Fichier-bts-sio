@@ -128,8 +128,11 @@ create table location (
 create table inscription (
     id_user int(10) not null,
     id_cours int(10) not null,
-    dateHeureDebut datetime not null,
-    dateHeureFin datetime,
+    date_resa date not null, 
+    prix float,
+    dateHeureDebut date not null,
+    dateHeureFin date,
+    etat_resa enum("en attente", "valide", "annule"),
     PRIMARY key (id_user,id_cours,dateHeureDebut),
     FOREIGN KEY (id_user) REFERENCES user (id_user),
     FOREIGN key (id_cours) REFERENCES cours (id_cours)

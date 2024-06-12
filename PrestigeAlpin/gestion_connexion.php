@@ -14,7 +14,7 @@ if (isset($_POST['Connexion'])) {
     if (!empty($email) && !empty($mdp)) {
         // Vérifie l'authentification de l'utilisateur
         $unUser = $unControleur->verifConnexion($email, $mdp);
-
+      
         if ($unUser != null) {
             // Authentification réussie
             $_SESSION['id_user'] = $unUser['id_user']; // Ajout de l'identifiant de l'utilisateur à la session

@@ -46,6 +46,7 @@ $lesCours = $modele->selectAll();
             if (isset($_SESSION['role']) && $_SESSION['role'] == "client") {
                 echo "<form method='post' action='reserver_cours.php'>";
                 echo "<input type='hidden' name='id_cours' value='".$cours['id_cours']."'>";
+                echo "<input type='hidden' name='prix_cours' value='".$cours['prix_cours']."'>";
                 echo "<input type='submit' name='reserver' value='Réserver'>";
                 echo "</form>";
             }

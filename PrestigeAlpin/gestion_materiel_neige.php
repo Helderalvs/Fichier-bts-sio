@@ -2,7 +2,6 @@
 
 	<?php
 
-
 	$unControleur->setTable("mat_neige");
 	if (isset($_SESSION['role']) && $_SESSION['role']=="client" ) {
 		$id_materiel = null; 

@@ -22,7 +22,7 @@ $lesReservations = array_merge($lesReservationsNeige, $lesReservationsRando);
     <link rel="stylesheet" href="css/style_front.css">
 </head>
 <body>
-    <h3>Liste des réservations</h3>
+    <h3>Liste des réservations Materiel</h3>
 
     <form method="post">
         Filtrer par : <input type="text" name="filtre">
@@ -38,7 +38,6 @@ $lesReservations = array_merge($lesReservationsNeige, $lesReservationsRando);
             <td>Prix location</td>
             <td>Date début location</td>
             <td>Date fin location</td>
-            <td>État réservation</td>
         </tr>
 
         <?php
@@ -52,7 +51,6 @@ $lesReservations = array_merge($lesReservationsNeige, $lesReservationsRando);
                 echo "<td>".$uneReservation['prix']." €</td>";
                 echo "<td>".date('d/m/Y', strtotime($uneReservation['dateDebutLoc']))."</td>";
                 echo "<td>".date('d/m/Y', strtotime($uneReservation['dateFinLoc']))."</td>";
-                echo "<td>".$uneReservation['etat_resa']."</td>";
                 echo "</tr>";
             }
         }

@@ -41,7 +41,7 @@
           <a class="nav-link" href="index.php?page=10">Les réservations</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="index.php?page=13">Votre planning</a>
+        <a class="nav-link" href="index.php?page=20">Les cours</a>
       </li>
         <li class="nav-item">
           <a class="nav-link" href="index.php?page=12">Mon compte</a>

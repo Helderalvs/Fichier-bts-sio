@@ -1,17 +1,21 @@
 <?php
+session_start();
+ 
 // Inclure la classe Modele
 require_once('modele/modele.class.php');
 
 // Créer une instance de la classe Modele pour la table des réservations
 $modele_reservation = new Modele();
-$modele_reservation->setTable("reservation");
+$modele_reservation->setTable("inscription");
+$id_cours = $_POST['id_cours'] ?? null;
+$prix_cours = $_POST['prix_cours'] ?? null;
 
 // Vérifier si le formulaire de réservation a été soumis
 if (isset($_POST['reserve_btn'])) {
     // Récupération des données du formulaire
     $id_cours = $_POST['id_cours'] ?? null;
-    $dateDebutLoc = $_POST['dateDebutLoc'] ?? '';
-    $dateFinLoc = $_POST['dateFinLoc'] ?? '';
+    $dateDebutLoc = $_POST['dateHeureDebut'] ?? '';
+    $dateFinLoc = $_POST['dateHeureFin'] ?? '';
 
     if ($id_cours && $dateDebutLoc && $dateFinLoc) {
         // Conversion des dates en objets DateTime pour la validation
@@ -25,37 +29,34 @@ if (isset($_POST['reserve_btn'])) {
 
             // Vérification de la durée de location
             if ($dureeLocation > 0) {
-                // Récupération des informations sur le cours
-                $modele_cours = new Modele();
-                $modele_cours->setTable("cours");
-                $cours = $modele_cours->selectWhere(array("id_cours" => $id_cours));
+                 
 
-                if ($cours && is_numeric($cours['prix_cours'])) {
+                if ( is_numeric($_POST['prix_cours'])) {
                     // Calcul du prix total
-                    $prixTotal = $cours['prix_cours'] * $dureeLocation;
+                    $prixTotal = $_POST['prix_cours'] * $dureeLocation;
 
                     // Données à insérer dans la table des réservations
                     $data = array(
-                        "id_user" => 1, // Utilisateur par défaut
+                        "id_user" =>  $_SESSION['id_user'], // Utilisateur par défaut
                         "id_cours" => $id_cours,
                         "date_resa" => date("Y-m-d"),
                         "prix" => $prixTotal,
-                        "dateDebutLoc" => $dateDebutLoc,
-                        "dateFinLoc" => $dateFinLoc,
+                        "dateHeureDebut" => $dateDebutLoc,
+                        "dateHeureFin" => $dateFinLoc,
                         "etat_resa" => "en attente"
                     );
-
+                  //  var_dump($data);
                     // Insertion de la réservation dans la base de données
                     $result = $modele_reservation->insert($data);
 
-                    if ($result) {
+                   // if ($result) {
                         echo "Réservation réussie pour le cours : " . $cours['nom_cours'] . ". Prix total : " . $prixTotal . "€";
                         // Redirection vers la page de réservation
-                        header("Location: index.php?page=10");
+                        header("Location: index.php?page=20");
                         exit(); // Arrêter l'exécution du script après la redirection
-                    } else {
-                        echo "Une erreur s'est produite lors de la réservation. Veuillez réessayer.";
-                    }
+                    //} else {
+                    //    echo "Une erreur s'est produite lors de la réservation. Veuillez réessayer.";
+                  //  }
                 } else {
                     echo "Les informations sur le cours sont invalides.";
                 }

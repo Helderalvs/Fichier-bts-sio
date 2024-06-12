@@ -33,6 +33,7 @@ $lesCours = $modele->selectAll();
     <title>Accueil</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/tab.css">
+        <link rel="stylesheet" href="css/style_front.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -62,6 +63,7 @@ $lesCours = $modele->selectAll();
             margin: 20px 0;
         }
 
+        
         .content button {
             background-color: #ff6600;
             color: #fff;
@@ -177,17 +179,19 @@ $lesCours = $modele->selectAll();
                         echo "<p>Stock : ".$unMatNeige['stock_initial']."</p>";
                         echo "<p>État : ".$unMatNeige['etat_materiel']."</p>";
                         if (isset($_SESSION['role']) && $_SESSION['role'] == "client") {
-                            echo "<form method='post'>";
+                            echo "<td>";
+                            echo "<form method='post' action='reserver.php'>";
                             echo "<input type='hidden' name='id_materiel' value='".$unMatNeige['id_materiel']."'>";
-                            echo "Date début location : <input type='date' name='dateDebutLoc' required>";
-                            echo "Date fin location : <input type='date' name='dateFinLoc' required>";
-                            echo "<input type='submit' name='reserver' value='Réserver'>";
+                            echo "<input type='submit' name='reserver' value='Reserver'>";
                             echo "</form>";
+                            echo "</td>";
                         }
                         echo "</div>";
                     }
                 }
                 ?>
+
+            
             </div>
         </div>
 

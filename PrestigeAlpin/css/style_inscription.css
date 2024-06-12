@@ -1,0 +1,72 @@
+/* style.css */
+.banner {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.banner h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333333;
+}
+
+.banner form {
+    width: 100%;
+}
+
+.banner table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.banner td {
+    padding: 10px 0;
+    text-align: left;
+}
+
+.banner input[type="text"],
+.banner input[type="email"],
+.banner input[type="password"],
+.banner input[type="submit"],
+.banner input[type="tel"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #495057;
+}
+
+.banner input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.banner input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.banner p {
+    margin-top: 20px;
+}
+
+.banner a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.banner a:hover {
+    text-decoration: underline;
+}

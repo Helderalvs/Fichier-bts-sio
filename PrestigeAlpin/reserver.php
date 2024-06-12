@@ -61,18 +61,18 @@ if (isset($_POST['reserve_btn'])) {
                         "etat_resa" => "en attente"
                     );
 
-                    $result = $modele_reservation->insert($data);
+                     $modele_reservation->insert($data);
 
-                    if ($result) {
+                   // if ($result) {
                         // Stocker le message de confirmation dans une variable de session
                         $_SESSION['confirmation_message'] = "Réservation réussie pour le matériel : " . $materiel['nom'] . ". Prix total : " . $prixTotal . "€";
                         // Redirection vers la page de réservation
-                        header("Location: gestion_reservation.php");
+                        header("Location: index.php?page=10");
                         exit();
-                    }
-                } else {
-                    echo "La durée de la location doit être supérieure à zéro.";
-                }
+                   // }
+                //} else {
+                //    echo "La durée de la location doit être supérieure à zéro.";
+                //}
             } else {
                 echo "Prix du matériel non valide.";
             }
@@ -83,7 +83,7 @@ if (isset($_POST['reserve_btn'])) {
         echo "Veuillez saisir les dates de début et de fin de location.";
     }
 }
-
+}
 // Définir les variables nécessaires pour le formulaire de réservation
 $date_resa = ''; // Initialisez ces variables avec des valeurs par défaut
 $prix = 0;

@@ -67,7 +67,8 @@ if (!empty($filtre)) {
                 echo "<td>";
                 echo "<form method='post' action='reserver.php'>";
                 echo "<input type='hidden' name='id_materiel' value='".$unMatNeige['id_materiel']."'>";
-                echo "<input type='submit' name='reserver' value='En savoir plus'>";
+                echo "<input type='hidden' name='nom' value='".$unMatNeige['nom']."'>";
+                echo "<input type='submit' name='reserver' value='Reserver'>";
                 echo "</form>";
                 echo "</td>";
             }

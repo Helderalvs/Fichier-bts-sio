@@ -69,6 +69,20 @@ class Modele {
 		return $select->fetch(); //un seul résultat
 	}
 
+	public function selectWhereAll($where) {
+		$champs = array();
+		$donnees = array();
+		foreach ($where as $cle => $valeur) {
+			$champs[] = $cle . " = :" . $cle;
+			$donnees[":" . $cle] = $valeur;
+		}
+		$chaine = implode(" and ", $champs);
+		$requete = "select * from " . $this->table . " where " . $chaine . ";";
+		$select = $this->unPDO->prepare($requete);
+		$select->execute($donnees);
+		return $select->fetchAll(); //tous les résultats
+	}
+
 	public function update($tab, $where) {
 		$champs = array();
 		$donnees = array();
