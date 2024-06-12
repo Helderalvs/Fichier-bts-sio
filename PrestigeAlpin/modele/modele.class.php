@@ -179,7 +179,7 @@ class Modele {
 	
 
 	/************ inscription **********/
-	public function verifInscription($nom, $prenom, $email, $mdp, $userType) {
+	public function verifInscription($nom, $prenom, $email, $mdp, $adresse, $telephone, $userType) {
 		try {
 			// Vérifie si l'email existe déjà dans la table user
 			$query = $this->unPDO->prepare("SELECT COUNT(*) FROM user WHERE email = :email");
@@ -194,11 +194,13 @@ class Modele {
 
 			// Insère les données dans la table appropriée en fonction du type d'utilisateur
 			$tableName = ($userType == "client") ? "client" : "moniteur";
-			$query = $this->unPDO->prepare("INSERT INTO $tableName (nom, prenom, email, mdp) VALUES (:nom, :prenom, :email, :mdp)");
+			$query = $this->unPDO->prepare("INSERT INTO $tableName (nom, prenom, email, mdp, adresse, telephone) VALUES (:nom, :prenom, :email, :mdp, :adresse, :telephone)");
 			$query->bindParam(":nom", $nom);
 			$query->bindParam(":prenom", $prenom);
 			$query->bindParam(":email", $email);
 			$query->bindParam(":mdp", $mdp);
+			$query->bindParam(":adresse", $adresse);
+			$query->bindParam(":telephone", $telephone);
 			$query->execute();
 
 			return true;
@@ -209,7 +211,7 @@ class Modele {
 	}
 
 	// Fonction de vérification de l'inscription pour un client
-	public function verifInscriptionClient($nom, $prenom, $email, $mdp) {
+	public function verifInscriptionClient($nom, $prenom, $email, $mdp, $adresse, $telephone) {
 		try {
 			// Vérifie si l'email existe déjà dans la table user
 			$query = $this->unPDO->prepare("SELECT COUNT(*) FROM user WHERE email = :email");
@@ -223,11 +225,13 @@ class Modele {
 			}
 
 			// Insère les données dans la table client
-			$query = $this->unPDO->prepare("INSERT INTO client (nom, prenom, email, mdp, role) VALUES (:nom, :prenom, :email, :mdp, 'client')");
+			$query = $this->unPDO->prepare("INSERT INTO client (nom, prenom, email, mdp,adresse, telephone, role) VALUES (:nom, :prenom, :email, :mdp, :adresse, :telephone, 'client')");
 			$query->bindParam(":nom", $nom);
 			$query->bindParam(":prenom", $prenom);
 			$query->bindParam(":email", $email);
 			$query->bindParam(":mdp", $mdp);
+			$query->bindParam(":adresse", $adresse);
+			$query->bindParam(":telephone", $telephone);
 			$query->execute();
 
 			return true;
@@ -238,7 +242,7 @@ class Modele {
 	}
 
 	// Fonction de vérification de l'inscription pour un représentant
-	public function verifInscriptionRepresentant($nom, $prenom, $email, $mdp) {
+	public function verifInscriptionRepresentant($nom, $prenom, $email, $mdp, $adresse, $telephone) {
 		try {
 			// Vérifie si l'email existe déjà dans la table user
 			$query = $this->unPDO->prepare("SELECT COUNT(*) FROM user WHERE email = :email");
@@ -252,11 +256,13 @@ class Modele {
 			}
 
 			// Insère les données dans la table representant
-			$query = $this->unPDO->prepare("INSERT INTO moniteur (nom, prenom, email, mdp, role) VALUES (:nom, :prenom, :email, :mdp, 'moniteur')");
+			$query = $this->unPDO->prepare("INSERT INTO moniteur (nom, prenom, email, mdp, adresse, telephone, role) VALUES (:nom, :prenom, :email, :mdp, :adresse, :telephone, 'moniteur')");
 			$query->bindParam(":nom", $nom);
 			$query->bindParam(":prenom", $prenom);
 			$query->bindParam(":email", $email);
 			$query->bindParam(":mdp", $mdp);
+			$query->bindParam(":adresse", $adresse);
+			$query->bindParam(":telephone", $telephone);
 			$query->execute();
 
 			return true;

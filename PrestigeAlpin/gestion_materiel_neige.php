@@ -4,7 +4,7 @@
 
 
 	$unControleur->setTable("mat_neige");
-	if (isset($_SESSION['role']) && $_SESSION['role']=="admin" ) {
+	if (isset($_SESSION['role']) && $_SESSION['role']=="client" ) {
 		$id_materiel = null; 
 		if(isset($_GET['action']) && isset($_GET['id_materiel']))
 		{
@@ -20,7 +20,6 @@
 				break;
 			}
 		}
-		require_once ("vue/vue_insert_mat_neige.php"); 
 		
 		if (isset($_POST['Valider'])){
 			//verification des données 

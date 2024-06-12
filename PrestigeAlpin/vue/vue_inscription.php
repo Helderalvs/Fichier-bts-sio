@@ -28,12 +28,20 @@
             <td><input type="password" name="mdp" required></td>
         </tr>
         <tr>
+            <td>Adresse</td>
+            <td><input type="text" name="adresse" required></td>
+        </tr>
+        <tr>
+            <td>Numéro de téléphone</td>
+            <td><input type="text" name="telephone" required></td>
+        </tr>
+        <tr>
             <td colspan="2"><input type="submit" name="Inscription" value="Inscription"></td>
         </tr>
     </table>
 </form>
 <p>Retourner à la page de connexion : <a href="gestion_connexion.php">Connexion</a></p>
-<p>Accueil <a href="index.php?page=2	">Accueil</a></p>
+<p>Accueil <a href="index.php?page=2">Accueil</a></p>
 </div>
 </body>
 </html>

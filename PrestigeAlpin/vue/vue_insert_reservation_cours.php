@@ -8,6 +8,7 @@
         // Afficher le formulaire de réservation
         ?>
         <form method="post" action="reserver.php">
+        <link rel="stylesheet" href="css/reservation.css">
             <label for="id_cours">Cours :</label>
             <select name="id_cours" id="id_cours" required>
                 <?php
@@ -28,6 +29,7 @@
             <input type="date" name="dateFinLoc" id="dateFinLoc" required>
             <br>
             <input type="submit" name="reserve_btn" value="Réserver">
+            <a href="vue/vue_select_mat_neige.php">Retour au matériel</a>
         </form>
 
         <?php

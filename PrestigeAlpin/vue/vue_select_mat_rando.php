@@ -22,7 +22,7 @@ if (!empty($filtre)) {
 }
 ?>
 
-<h3>Liste matériel ski</h3>
+<h3>Liste matériel rando</h3>
 <!DOCTYPE html>
 <html lang="en">
 <head>

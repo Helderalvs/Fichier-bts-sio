@@ -10,16 +10,18 @@ if (isset($_POST['Inscription'])) {
     $prenom = isset($_POST['prenom']) ? $_POST['prenom'] : '';
     $email = isset($_POST['email']) ? $_POST['email'] : '';
     $mdp = isset($_POST['mdp']) ? $_POST['mdp'] : '';
+    $adresse = isset($_POST['adresse']) ? $_POST['adresse'] : '';
+    $telephone = isset($_POST['telephone']) ? $_POST['telephone'] : '';
 
     // Valider les données du formulaire (ajoutez d'autres validations selon vos besoins)
-    if (empty($nom) || empty($prenom) || empty($email) || empty($mdp)) {
+    if (empty($nom) || empty($prenom) || empty($email) || empty($mdp) || empty($adresse) || empty($telephone)) {
         echo "Veuillez remplir tous les champs.";
     } else {
         // Hasher le mot de passe
         //$mdp_hash = password_hash($mdp, PASSWORD_DEFAULT);
 
         // Appeler la méthode de vérification d'inscription pour les clients
-        $resultat = $unControleur->verifInscriptionClient($nom, $prenom, $email, $mdp);
+        $resultat = $unControleur->verifInscriptionClient($nom, $prenom, $email, $mdp, $adresse, $telephone);
 
         if ($resultat) {
             // Rediriger l'utilisateur vers la page d'accueil
@@ -30,7 +32,6 @@ if (isset($_POST['Inscription'])) {
         }
     }
 }
-
 // Afficher le formulaire d'inscription
 require_once("vue/vue_inscription.php");
 ?>

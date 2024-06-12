@@ -114,6 +114,8 @@ create table cours (
     PRIMARY KEY (id_cours)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+
 create table location (
     id_resa int(10) not null,
     id_materiel int(10) not null,
@@ -133,7 +135,15 @@ create table inscription (
     FOREIGN key (id_cours) REFERENCES cours (id_cours)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
+CREATE TABLE planning (
+    id_planning INT(10) NOT NULL AUTO_INCREMENT,
+    id_cours INT(10) NOT NULL,
+    date_jour DATE,
+    heure_debut TIME,
+    heure_fin TIME,
+    PRIMARY KEY (id_planning),
+    FOREIGN KEY (id_cours) REFERENCES cours (id_cours)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 

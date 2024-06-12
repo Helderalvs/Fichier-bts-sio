@@ -51,14 +51,14 @@
 		}
 
 		/************ inscription **********/
-		public function verifInscription ($nom, $prenom, $email, $mdp,$userType){
-			return $this->unModele->verifInscription ($nom, $prenom, $email, $mdp,$userType);
+		public function verifInscription ($nom, $prenom, $email, $mdp, $adresse, $telephone,$userType){
+			return $this->unModele->verifInscription ($nom, $prenom, $email, $mdp, $adresse, $telephone, $userType);
 		}
-		public function verifInscriptionClient ($nom, $prenom, $email, $mdp){
-			return $this->unModele->verifInscriptionClient ($nom, $prenom, $email, $mdp);
+		public function verifInscriptionClient ($nom, $prenom, $email, $mdp, $adresse, $telephone){
+			return $this->unModele->verifInscriptionClient ($nom, $prenom, $email, $mdp, $adresse, $telephone);
 		}
-		public function verifInscriptionRepresentant ($nom, $prenom, $email, $mdp){
-			return $this->unModele->verifInscriptionRepresentant ($nom, $prenom, $email, $mdp);
+		public function verifInscriptionRepresentant ($nom, $prenom, $email, $mdp, $adresse, $telephone){
+			return $this->unModele->verifInscriptionRepresentant ($nom, $prenom, $email, $mdp, $adresse, $telephone);
 		}
 		
 

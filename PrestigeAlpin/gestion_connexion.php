@@ -17,7 +17,7 @@ if (isset($_POST['Connexion'])) {
 
         if ($unUser != null) {
             // Authentification réussie
-            $_SESSION['id_user'] = $unUser['id']; // Ajout de l'identifiant de l'utilisateur à la session
+            $_SESSION['id_user'] = $unUser['id_user']; // Ajout de l'identifiant de l'utilisateur à la session
             $_SESSION['email'] = $unUser['email'];
             $_SESSION['nom'] = $unUser['nom'];
             $_SESSION['prenom'] = $unUser['prenom'];

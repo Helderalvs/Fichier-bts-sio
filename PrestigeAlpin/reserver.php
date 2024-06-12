@@ -1,6 +1,5 @@
-
-
 <?php
+session_start(); // Démarrer la session
 
 // Inclure la classe Modele
 require_once('modele/modele.class.php');
@@ -42,7 +41,6 @@ if (isset($_POST['reserve_btn'])) {
         // Fusionner les données récupérées des deux tables
         $materiel = ($materiel_neige) ? $materiel_neige : $materiel_rando;
 
-
         if ($materiel) {
             if (is_numeric($materiel['prix_loca'])) {
                 $dateDebut = new DateTime($dateDebutLoc);
@@ -66,9 +64,11 @@ if (isset($_POST['reserve_btn'])) {
                     $result = $modele_reservation->insert($data);
 
                     if ($result) {
-                        echo "Réservation réussie pour le matériel : " . $materiel['nom'] . ". Prix total : " . $prixTotal . "€";
+                        // Stocker le message de confirmation dans une variable de session
+                        $_SESSION['confirmation_message'] = "Réservation réussie pour le matériel : " . $materiel['nom'] . ". Prix total : " . $prixTotal . "€";
                         // Redirection vers la page de réservation
-                        header("Location: index.php?page=10");
+                        header("Location: gestion_reservation.php");
+                        exit();
                     }
                 } else {
                     echo "La durée de la location doit être supérieure à zéro.";
@@ -76,7 +76,9 @@ if (isset($_POST['reserve_btn'])) {
             } else {
                 echo "Prix du matériel non valide.";
             }
-        } 
+        } else {
+            echo "Matériel non trouvé.";
+        }
     } else {
         echo "Veuillez saisir les dates de début et de fin de location.";
     }

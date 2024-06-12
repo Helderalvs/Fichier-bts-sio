@@ -8,6 +8,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 'client') {
     // Afficher le formulaire de réservation
     ?>
 <form method="post" action="reserver.php">
+    <link rel="stylesheet" href="css/reservation.css">
     <label for="id_materiel">Matériel :</label>
     <select name="id_materiel" id="id_materiel" required>
         <?php
@@ -35,6 +36,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] == 'client') {
     <input type="date" name="dateFinLoc" id="dateFinLoc" required>
     <br>
     <input type="submit" name="reserve_btn" value="Réserver">
+    <a href="vue/vue_select_mat_neige.php">Retour au matériel</a>
 </form>
 
     <?php
